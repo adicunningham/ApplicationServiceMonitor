@@ -22,6 +22,8 @@ namespace ServiceMonitorModule.View
     {
         public ServiceMonitorContentView()
         {
+
+
             InitializeComponent();
         }
     }
