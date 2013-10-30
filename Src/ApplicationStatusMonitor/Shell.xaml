@@ -1,0 +1,45 @@
+﻿<Window x:Class="ApplicationStatusMonitor.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://www.codeplex.com/prism" 
+        xmlns:inf="clr-namespace:ApplicationStatusMonitor.Infrastructure;assembly=ApplicationStatusMonitor.Infrastructure" 
+        Title="Shell" Height="300" Width="300">
+    <!-- Layout Grid -->
+    <Grid x:Name="Layout">
+        <Grid.RowDefinitions>
+            <RowDefinition Name="ToolbarRow" Height="Auto"/>
+            <RowDefinition Name="ClientRow" Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Toolbar Row -->
+        <ContentControl Grid.Row="0" prism:RegionManager.RegionName="{x:Static inf:RegionNames.ToolbarRegion}"></ContentControl>
+        
+        <!-- Client row -->
+        <Grid x:Name="ClientArea" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Name="NavigationColumn" Width="0.200*"/>
+                <ColumnDefinition Name="WorkspaceColumn" Width="0.600*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- Navigation Grid Pane -->
+            <Grid Name="NavigationGrid">
+                <Grid.RowDefinitions>
+                    <RowDefinition Name="Navigator" Height="*"/>
+                    <RowDefinition Name="TaskButton" Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!-- Navigator Region -->
+                <ContentControl Grid.Row="0" prism:RegionManager.RegionName="{x:Static inf:RegionNames.NavigationRegion}"/>
+                    
+                <!-- Taskbutton Region -->
+                <ContentControl Grid.Row="0" prism:RegionManager.RegionName="{x:Static inf:RegionNames.TaskbuttonRegion}"/>
+
+            </Grid>
+            
+            <!-- Workspace Region -->
+            <ContentControl Grid.Column="1" prism:RegionManager.RegionName="{x:Static inf:RegionNames.WorkspaceRegion}"/>
+        </Grid>        
+    </Grid>
+        
+    
+</Window>
