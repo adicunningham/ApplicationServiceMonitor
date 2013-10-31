@@ -12,17 +12,33 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ApplicationStatusMonitor.Infrastructure;
+using ServiceMonitorModule.ViewModel;
 
 namespace ServiceMonitorModule.View
 {
     /// <summary>
     /// Interaction logic for ServiceMonitorToolbar.xaml
     /// </summary>
-    public partial class ServiceMonitorToolbarView : UserControl
+    public partial class ServiceMonitorToolbarView : UserControl, IView
     {
-        public ServiceMonitorToolbarView()
+        public ServiceMonitorToolbarView(IServiceMonitorToolbarViewModel viewModel)
         {
             InitializeComponent();
+
+            ViewModel = viewModel;
+        }
+
+        public IViewModel ViewModel
+        {
+            get
+            {
+                return (IViewModel) DataContext;
+            }
+            set
+            {
+                DataContext = value;
+            }
         }
     }
 }

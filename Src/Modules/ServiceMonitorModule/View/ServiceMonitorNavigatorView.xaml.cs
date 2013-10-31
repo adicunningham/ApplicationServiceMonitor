@@ -12,17 +12,33 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ApplicationStatusMonitor.Infrastructure;
+using ServiceMonitorModule.ViewModel;
 
 namespace ServiceMonitorModule.View
 {
     /// <summary>
     /// Interaction logic for ServiceMonitorNavigator.xaml
     /// </summary>
-    public partial class ServiceMonitorNavigatorView : UserControl
+    public partial class ServiceMonitorNavigatorView : UserControl, IView
     {
-        public ServiceMonitorNavigatorView()
+        public ServiceMonitorNavigatorView(IServiceMonitorNavigatorViewModel viewModel)
         {
             InitializeComponent();
+
+            ViewModel = viewModel;
+        }
+
+        public IViewModel ViewModel
+        {
+            get
+            {
+                return (IViewModel) DataContext;
+            }
+            set
+            {
+                DataContext = value;
+            }
         }
     }
 }

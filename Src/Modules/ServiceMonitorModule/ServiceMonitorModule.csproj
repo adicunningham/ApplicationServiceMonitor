@@ -88,6 +88,14 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ServiceMonitorModule.cs" />
+    <Compile Include="ViewModel\IServiceMonitorContentViewModel.cs" />
+    <Compile Include="ViewModel\IServiceMonitorNavigatorViewModel.cs" />
+    <Compile Include="ViewModel\IServiceMonitorTaskButtonViewModel.cs" />
+    <Compile Include="ViewModel\IServiceMonitorToolbarViewModel.cs" />
+    <Compile Include="ViewModel\ServiceMonitorContentViewModel.cs" />
+    <Compile Include="ViewModel\ServiceMonitorNavigatorViewModel.cs" />
+    <Compile Include="ViewModel\ServiceMonitorTaskButtonViewModel.cs" />
+    <Compile Include="ViewModel\ServiceMonitorToolbarViewModel.cs" />
     <Compile Include="View\ServiceMonitorContentView.xaml.cs">
       <DependentUpon>ServiceMonitorContentView.xaml</DependentUpon>
     </Compile>
@@ -135,8 +143,12 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="ViewModel\" />
+    <ProjectReference Include="..\..\ApplicationStatusMonitor.Infrastructure\ApplicationStatusMonitor.Infrastructure.csproj">
+      <Project>{e2ce70b0-470b-4a90-80ee-d9c887fae0aa}</Project>
+      <Name>ApplicationStatusMonitor.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
