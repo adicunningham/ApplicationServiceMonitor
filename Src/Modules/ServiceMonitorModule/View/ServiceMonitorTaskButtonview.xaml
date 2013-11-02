@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:fsTaskButton="clr-namespace:FsTaskButton;assembly=FsTaskButton"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d">
     <Grid>
         <fsTaskButton:TaskButton x:Name="TaskButton"
             Command="{Binding ShowProgramModuleView}" 

@@ -122,6 +122,10 @@
       <Project>{e2ce70b0-470b-4a90-80ee-d9c887fae0aa}</Project>
       <Name>ApplicationStatusMonitor.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Modules\ServiceMonitorModule\ServiceMonitorModule.csproj">
+      <Project>{a81ce66c-8b02-43a9-9cea-d19dd77eb3d2}</Project>
+      <Name>ServiceMonitorModule</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Shell.xaml">

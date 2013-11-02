@@ -3,26 +3,37 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://www.codeplex.com/prism" 
         xmlns:inf="clr-namespace:ApplicationStatusMonitor.Infrastructure;assembly=ApplicationStatusMonitor.Infrastructure" 
-        Title="Shell" Height="300" Width="300">
+        Title="Shell" Height="600" Width="600">
+
+    <Window.Resources>
+        <Border x:Key="LayoutBorder" BorderBrush="Teal" BorderThickness="1"/>
+    </Window.Resources>
+    
     <!-- Layout Grid -->
     <Grid x:Name="Layout">
+
+        
         <Grid.RowDefinitions>
             <RowDefinition Name="ToolbarRow" Height="Auto"/>
             <RowDefinition Name="ClientRow" Height="*"/>
         </Grid.RowDefinitions>
-        
+
+
         <!-- Toolbar Row -->
-        <ContentControl Grid.Row="0" prism:RegionManager.RegionName="{x:Static inf:RegionNames.ToolbarRegion}"></ContentControl>
+        <ContentControl Grid.Row="0" prism:RegionManager.RegionName="{x:Static inf:RegionNames.ToolbarRegion}" BorderBrush="Teal" BorderThickness="1"/>
         
         <!-- Client row -->
         <Grid x:Name="ClientArea" Grid.Row="1">
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Name="NavigationColumn" Width="0.200*"/>
                 <ColumnDefinition Name="WorkspaceColumn" Width="0.600*"/>
             </Grid.ColumnDefinitions>
-            
+            <Border Grid.Column="1" BorderBrush="Teal" BorderThickness="1"></Border>
+
             <!-- Navigation Grid Pane -->
-            <Grid Name="NavigationGrid">
+            <Grid Name="NavigationGrid" Background="Gainsboro">
+
                 <Grid.RowDefinitions>
                     <RowDefinition Name="Navigator" Height="*"/>
                     <RowDefinition Name="TaskButton" Height="Auto"/>
@@ -30,9 +41,10 @@
 
                 <!-- Navigator Region -->
                 <ContentControl Grid.Row="0" prism:RegionManager.RegionName="{x:Static inf:RegionNames.NavigationRegion}"/>
-                    
+
                 <!-- Taskbutton Region -->
-                <ContentControl Grid.Row="0" prism:RegionManager.RegionName="{x:Static inf:RegionNames.TaskbuttonRegion}"/>
+                <ContentControl Grid.Row="1" prism:RegionManager.RegionName="{x:Static inf:RegionNames.TaskbuttonRegion}"/>
+
 
             </Grid>
             
@@ -40,6 +52,5 @@
             <ContentControl Grid.Column="1" prism:RegionManager.RegionName="{x:Static inf:RegionNames.WorkspaceRegion}"/>
         </Grid>        
     </Grid>
-        
     
 </Window>

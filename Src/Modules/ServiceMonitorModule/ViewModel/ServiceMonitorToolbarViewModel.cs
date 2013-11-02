@@ -10,7 +10,7 @@ namespace ServiceMonitorModule.ViewModel
     {
         public ServiceMonitorToolbarViewModel()
         {
-            
+               
         }
     }
 }

@@ -19,9 +19,16 @@ namespace ApplicationStatusMonitor
             App.Current.MainWindow.Show();
         }
 
-        protected override IModuleCatalog CreateModuleCatalog()
+        //protected override IModuleCatalog CreateModuleCatalog()
+        //{
+        //    return new ConfigurationModuleCatalog();
+        //}
+
+        protected override void ConfigureModuleCatalog()
         {
-            return new ConfigurationModuleCatalog();
-        }
+            base.ConfigureModuleCatalog();
+            ModuleCatalog moduleCatalog = (ModuleCatalog)this.ModuleCatalog;
+            moduleCatalog.AddModule(typeof(ServiceMonitorModule.ServiceMonitorModule));
+        } 
     }
 }

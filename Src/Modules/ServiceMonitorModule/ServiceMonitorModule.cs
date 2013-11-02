@@ -20,6 +20,7 @@ namespace ServiceMonitorModule
         {
             _unityContainer = unityContainer;
             _regionManager = regionManager;
+            
         }
 
         #endregion
