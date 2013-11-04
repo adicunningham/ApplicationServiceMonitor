@@ -88,6 +88,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="ServiceMonitorModule.cs" />
+    <Compile Include="Model\ApplicationService.cs" />
     <Compile Include="ViewModel\IServiceMonitorContentViewModel.cs" />
     <Compile Include="ViewModel\IServiceMonitorNavigatorViewModel.cs" />
     <Compile Include="ViewModel\IServiceMonitorTaskButtonViewModel.cs" />
@@ -126,6 +127,10 @@
     <Resource Include="View\Images\SmallIcon.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Resources\DataGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ServiceMonitorContentView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

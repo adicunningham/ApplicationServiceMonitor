@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{F182D9FF-70A7-40AD-AC5C-90847E5FC42C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{D1E8425D-5879-4648-BA4F-CC1D1A920103}"
@@ -12,6 +10,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationStatusMonitor.Infrastructure", "Src\ApplicationStatusMonitor.Infrastructure\ApplicationStatusMonitor.Infrastructure.csproj", "{E2CE70B0-470B-4A90-80EE-D9C887FAE0AA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceMonitorModule", "src\Modules\ServiceMonitorModule\ServiceMonitorModule.csproj", "{A81CE66C-8B02-43A9-9CEA-D19DD77EB3D2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationStatusMonitor.Model", "Src\Business\ApplicationStatusMonitor.Model\ApplicationStatusMonitor.Model.csproj", "{06BBEDA4-091C-412E-AE2D-1DF47F17453E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,11 +31,16 @@ Global
 		{A81CE66C-8B02-43A9-9CEA-D19DD77EB3D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A81CE66C-8B02-43A9-9CEA-D19DD77EB3D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A81CE66C-8B02-43A9-9CEA-D19DD77EB3D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06BBEDA4-091C-412E-AE2D-1DF47F17453E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06BBEDA4-091C-412E-AE2D-1DF47F17453E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06BBEDA4-091C-412E-AE2D-1DF47F17453E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06BBEDA4-091C-412E-AE2D-1DF47F17453E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{06BBEDA4-091C-412E-AE2D-1DF47F17453E} = {F182D9FF-70A7-40AD-AC5C-90847E5FC42C}
 		{A81CE66C-8B02-43A9-9CEA-D19DD77EB3D2} = {D1E8425D-5879-4648-BA4F-CC1D1A920103}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

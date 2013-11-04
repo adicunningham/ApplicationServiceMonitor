@@ -9,11 +9,11 @@ namespace ServiceMonitorModule.View
     /// </summary>
     public partial class ServiceMonitorContentView : UserControl, IView
     {
-        public ServiceMonitorContentView(IServiceMonitorContentViewModel vieModel)
+        public ServiceMonitorContentView(IServiceMonitorContentViewModel viewModel)
         {
             InitializeComponent();
 
-            ViewModel = ViewModel;
+            ViewModel = viewModel;
         }
 
         public IViewModel ViewModel

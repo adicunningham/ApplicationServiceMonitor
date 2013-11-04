@@ -4,9 +4,41 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary Source="../Resources/DataGrid.xaml"/>
+    </UserControl.Resources>
+    
     <Grid>
-        <ListBox>
-            <ItemsControl ></ItemsControl>
-        </ListBox>
+
+
+        <DataGrid ItemsSource="{Binding ApplicationServices}" AutoGenerateColumns="False" Width="Auto">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=ApplicationServiceID}" Visibility="Hidden"/>
+                <DataGridTextColumn Binding="{Binding Path=StatusId}" Visibility="Hidden"/>
+                <DataGridTextColumn Binding="{Binding Path=ApplicationName}" Header="Application"/>
+                <DataGridTextColumn Binding="{Binding Path=ServerName}" Header="Server"/>
+                <DataGridTextColumn Binding="{Binding Path=ServiceName}" Header="Service"/>
+                <DataGridTextColumn Binding="{Binding Path=Status}" Header="Status" Width="*"/>
+                
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu Name="ActionMenu" StaysOpen="True">
+                    <MenuItem Header="Start"/>
+                    <MenuItem Header="Stop"/>
+                    <MenuItem Header="Restart"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+
+        <!--<ListBox ItemsSource="{Binding ApplicationServices}" SelectedItem="{Binding SelectedService}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding SelectedService.ServiceName}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>-->
     </Grid>
 </UserControl>
