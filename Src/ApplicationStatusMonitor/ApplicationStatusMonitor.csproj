@@ -34,6 +34,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\packages\EntityFramework.6.0.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\packages\log4net.2.0.2\lib\net40-full\log4net.dll</HintPath>
     </Reference>
@@ -121,6 +128,10 @@
     <ProjectReference Include="..\ApplicationStatusMonitor.Infrastructure\ApplicationStatusMonitor.Infrastructure.csproj">
       <Project>{e2ce70b0-470b-4a90-80ee-d9c887fae0aa}</Project>
       <Name>ApplicationStatusMonitor.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Modules\ServiceModule\ServiceModule.csproj">
+      <Project>{27eee6ba-b31a-466e-9891-bcdfd6f60a3f}</Project>
+      <Name>ServiceModule</Name>
     </ProjectReference>
     <ProjectReference Include="..\Modules\ServiceMonitorModule\ServiceMonitorModule.csproj">
       <Project>{a81ce66c-8b02-43a9-9cea-d19dd77eb3d2}</Project>

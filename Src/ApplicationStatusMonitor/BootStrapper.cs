@@ -28,6 +28,7 @@ namespace ApplicationStatusMonitor
         {
             base.ConfigureModuleCatalog();
             ModuleCatalog moduleCatalog = (ModuleCatalog)this.ModuleCatalog;
+            moduleCatalog.AddModule(typeof(ServiceModule.ServiceModule));
             moduleCatalog.AddModule(typeof(ServiceMonitorModule.ServiceMonitorModule));
         } 
     }

@@ -154,6 +154,10 @@
       <Project>{e2ce70b0-470b-4a90-80ee-d9c887fae0aa}</Project>
       <Name>ApplicationStatusMonitor.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Business\ApplicationStatusMonitor.Model\ApplicationStatusMonitor.Model.csproj">
+      <Project>{06bbeda4-091c-412e-ae2d-1df47f17453e}</Project>
+      <Name>ApplicationStatusMonitor.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

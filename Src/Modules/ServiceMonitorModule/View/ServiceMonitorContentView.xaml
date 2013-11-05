@@ -11,7 +11,12 @@
     <Grid>
 
 
-        <DataGrid ItemsSource="{Binding ApplicationServices}" AutoGenerateColumns="False" Width="Auto">
+        <DataGrid ItemsSource="{Binding ApplicationServices}" 
+                  AutoGenerateColumns="False" 
+                  Margin="10" 
+                  AlternationCount="2"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=ApplicationServiceID}" Visibility="Hidden"/>

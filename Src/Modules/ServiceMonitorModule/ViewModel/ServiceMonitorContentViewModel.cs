@@ -11,8 +11,10 @@ namespace ServiceMonitorModule.ViewModel
 {
     public class ServiceMonitorContentViewModel : ViewModelBase, IServiceMonitorContentViewModel
     {
-        public ServiceMonitorContentViewModel()
+        private IStatusMonitorService _statusMonitorService;
+        public ServiceMonitorContentViewModel(IStatusMonitorService statusMonitorService)
         {
+            _statusMonitorService = statusMonitorService;
             LoadServices();
         }
 
@@ -48,16 +50,19 @@ namespace ServiceMonitorModule.ViewModel
         {
             _applicationServices = new ObservableCollection<ApplicationService>();
 
-            for (int i = 0; i < 10; i++)
+            var appServices = _statusMonitorService.GetApplicationServices();
+
+            foreach (var service in appServices)
             {
-                ApplicationService service = new ApplicationService();
-                service.ApplicationServiceID = i + 1;
-                service.ApplicationName = string.Format("Applicastion{0}", i + 1);
-                service.ServerName = "MyService";
-                service.ServiceName = string.Format("Service{0}", i + 1);
-                service.Status = "Online";
-                service.StatusID = 1;
-                _applicationServices.Add(service);
+                _applicationServices.Add(new ApplicationService
+                {
+                    ApplicationName = service.ServiceName,
+                    ApplicationServiceID = service.ApplicationServiceId,
+                    ServerName = service.Server.ServerName,
+                    Status = "Online",
+                    StatusID = 0
+                });
+
             }
 
             ApplicationServices = _applicationServices;
