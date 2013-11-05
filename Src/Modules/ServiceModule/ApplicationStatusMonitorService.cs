@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 using ApplicationStatusMonitor.Data;
@@ -31,6 +32,8 @@ namespace ServiceModule
 
         public IList<Application> GetApplications()
         {
+            //ServiceController svcController = new ServiceController();
+
             return _serviceRepository.GetApplications();
         }
     }
