@@ -52,11 +52,11 @@ namespace ApplicationStatusMonitor.Data.Migrations
                 ModifiedOn = createdOn
             };
 
-            context.Servers.AddOrUpdate(s => s.ServerName, ac1);
-            context.Servers.AddOrUpdate(s => s.ServerName, ac2);
+            context.Server.AddOrUpdate(s => s.ServerName, ac1);
+            context.Server.AddOrUpdate(s => s.ServerName, ac2);
 
 
-            context.Applications.AddOrUpdate(
+            context.Application.AddOrUpdate(
                 a => a.ApplicationName,
                 new Application
                 {

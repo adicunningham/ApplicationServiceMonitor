@@ -11,7 +11,7 @@ namespace ApplicationStatusMonitor.Data
         {
             using (var ctx = new ApplicationServiceDb())
             {
-                return ctx.Servers.ToList();
+                return ctx.Server.ToList();
             }
         }
 
@@ -19,7 +19,7 @@ namespace ApplicationStatusMonitor.Data
         {
             using (var ctx = new ApplicationServiceDb())
             {
-                return ctx.ApplicationServices.Include(service => service.Server).ToList();
+                return ctx.ApplicationService.Include(service => service.Server).ToList();
             }
         }
 
@@ -27,7 +27,7 @@ namespace ApplicationStatusMonitor.Data
         {
             using (var ctx = new ApplicationServiceDb())
             {
-                return ctx.Applications.Include(a => a.Services.Select(s => s.Server)).ToList();
+                return ctx.Application.Include(a => a.Services.Select(s => s.Server)).ToList();
             }
         }
     }

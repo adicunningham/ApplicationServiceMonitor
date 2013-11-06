@@ -12,5 +12,8 @@ namespace ApplicationStatusMonitor.Infrastructure
         IList<Server> GetServers();
         IList<Application> GetApplications();
         IList<ApplicationService> GetApplicationServices();
+        string GetServiceStatus(string serverName, string serviceName);
+        void StopService(string serverName, string serviceName);
+        void StartService(string serverName, string serviceName);
     }
 }
