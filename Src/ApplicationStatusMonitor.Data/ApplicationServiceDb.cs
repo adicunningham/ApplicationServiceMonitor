@@ -4,7 +4,7 @@ using ApplicationStatusMonitor.Model.Entities;
 
 namespace ApplicationStatusMonitor.Data
 {
-    internal class ApplicationServiceDb : DbContext
+    public class ApplicationServiceDb : DbContext
     {
         public ApplicationServiceDb()
             : base(ConfigurationManager.ConnectionStrings["ApplicationStatusDb"].ConnectionString)

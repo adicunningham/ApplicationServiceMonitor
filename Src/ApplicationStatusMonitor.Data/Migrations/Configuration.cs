@@ -31,6 +31,13 @@ namespace ApplicationStatusMonitor.Data.Migrations
             //    );
             //
 
+            var devEnvironment = new Model.Entities.Environment {EnvironmentName = "Development"};
+            var testEnvironment = new Model.Entities.Environment {EnvironmentName = "System Test"};
+            var prodMirrorEnvironment = new Model.Entities.Environment {EnvironmentName = "Prod Mirror"};
+            var prodEnvironment = new Model.Entities.Environment { EnvironmentName = "Production"};
+
+
+
             var systemUser = "system";
             var createdOn = DateTime.Now;
 

@@ -9,5 +9,8 @@ namespace ApplicationStatusMonitor.Model.Entities
         public string ApplicationName { get; set; }
         public string ApplicationDescription { get; set; }
         public IList<ApplicationService> Services { get; set; }
+
+        public Environment Environment { get; set; }
+    
     }
 }

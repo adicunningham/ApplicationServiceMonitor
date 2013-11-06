@@ -21,7 +21,7 @@ namespace ServiceModule
 
         public void Initialize()
         {
-            _container.RegisterType<IApplicationServiceRepository, ApplicationServiceRepository>();
+            _container.RegisterType<IUnitOfWork, UnitOfWork>();
             _container.RegisterType<IStatusMonitorService, ApplicationStatusMonitorService>();
         }
     }

@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ApplicationStatusMonitor.Model.Entities.Application">
+    <Position X="4.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAACAAAEAAAAAQAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Application.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ApplicationStatusMonitor.Model.Entities.ApplicationService">
+    <Position X="7" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAgAAAAEAAAAAAAAAQAEAAAAAAAAAAAAAAAAAgAABAA=</HashCode>
+      <FileName>Entities\ApplicationService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ApplicationStatusMonitor.Model.Entities.BaseEntity" Collapsed="true">
+    <Position X="9" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACABAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Entities\BaseEntity.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ApplicationStatusMonitor.Model.Entities.Environment">
+    <Position X="11.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Entities\Environment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ApplicationStatusMonitor.Model.Entities.Server" Collapsed="true">
+    <Position X="9.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Server.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ApplicationStatusMonitor.Model.Entities.ServiceType" Collapsed="true">
+    <Position X="13.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\ServiceType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ApplicationStatusMonitor.Model.Entities.Status" Collapsed="true">
+    <Position X="9.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAIAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Status.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

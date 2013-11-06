@@ -43,10 +43,14 @@
     <Compile Include="Entities\Application.cs" />
     <Compile Include="Entities\ApplicationService.cs" />
     <Compile Include="Entities\BaseEntity.cs" />
+    <Compile Include="Entities\Environment.cs" />
     <Compile Include="Entities\Server.cs" />
     <Compile Include="Entities\ServiceType.cs" />
     <Compile Include="Entities\Status.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="EntityClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

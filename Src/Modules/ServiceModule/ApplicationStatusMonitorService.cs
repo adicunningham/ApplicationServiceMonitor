@@ -13,30 +13,30 @@ namespace ServiceModule
 {
     public class ApplicationStatusMonitorService : IStatusMonitorService
     {
-        private IApplicationServiceRepository _serviceRepository;
+        private IUnitOfWork _unitOfWork;
         private ServiceController _serviceController;
 
-        public ApplicationStatusMonitorService(IApplicationServiceRepository serviceRepository)
+        public ApplicationStatusMonitorService(IUnitOfWork unitOfWork)
         {
-            _serviceRepository = serviceRepository;
+            _unitOfWork = unitOfWork;
             _serviceController = new ServiceController();
         }
 
         public IList<Server> GetServers()
         {
-            return _serviceRepository.GetServers();
+            return _unitOfWork.ServerRepository.Get().ToList();
         }
 
         public IList<ApplicationService> GetApplicationServices()
         {
-            return _serviceRepository.GetApplicationServices();
+            return _unitOfWork.ApplicationServiceRepository.Get(includeProperties: "Server").ToList();
         }
 
         public IList<Application> GetApplications()
         {
             //ServiceController svcController = new ServiceController();
 
-            return _serviceRepository.GetApplications();
+            return _unitOfWork.ApplicationRepository.Get(includeProperties: "Services").ToList();
         }
 
         /// <summary>

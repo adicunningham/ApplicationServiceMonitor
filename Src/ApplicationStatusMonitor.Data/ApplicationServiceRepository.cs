@@ -7,8 +7,16 @@ namespace ApplicationStatusMonitor.Data
 {
     public class ApplicationServiceRepository : IApplicationServiceRepository
     {
+        private Repository<ApplicationServiceDb> _repository;
+
+        public ApplicationServiceRepository()
+        {
+            
+        }
+
         public IList<Server> GetServers()
         {
+            
             using (var ctx = new ApplicationServiceDb())
             {
                 return ctx.Server.ToList();

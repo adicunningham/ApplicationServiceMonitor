@@ -74,7 +74,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IRespository.cs" />
     <Compile Include="IStatusMonitorService.cs" />
     <Compile Include="IView.cs" />
     <Compile Include="IViewModel.cs" />
@@ -105,10 +104,6 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ApplicationStatusMonitor.Data\ApplicationStatusMonitor.Data.csproj">
-      <Project>{0ea2f08e-3b71-442a-a0df-668aa0a6549d}</Project>
-      <Name>ApplicationStatusMonitor.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Business\ApplicationStatusMonitor.Model\ApplicationStatusMonitor.Model.csproj">
       <Project>{06bbeda4-091c-412e-ae2d-1df47f17453e}</Project>
       <Name>ApplicationStatusMonitor.Model</Name>
