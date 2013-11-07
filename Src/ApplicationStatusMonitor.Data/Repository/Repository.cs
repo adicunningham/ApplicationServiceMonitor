@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
+using ApplicationStatusMonitor.Data.Extensions;
 
-namespace ApplicationStatusMonitor.Data
+namespace ApplicationStatusMonitor.Data.Repository
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
@@ -24,9 +25,9 @@ namespace ApplicationStatusMonitor.Data
         /// <param name="orderby">Order by criteria</param>
         /// <param name="includeProperties"></param>
         /// <returns></returns>
-        public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null, 
-                                        Func<IQueryable<TEntity>, 
-                                        IOrderedQueryable<TEntity>> orderby = null, 
+        public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null,
+                                        Func<IQueryable<TEntity>,
+                                        IOrderedQueryable<TEntity>> orderby = null,
                                         string includeProperties = "")
         {
             IQueryable<TEntity> query = _dbSet;
@@ -36,7 +37,7 @@ namespace ApplicationStatusMonitor.Data
                 query = query.Where(filter);
             }
 
-            foreach (var includeProperty in includeProperties.Split(new char[] {','}, StringSplitOptions.RemoveEmptyEntries))
+            foreach (var includeProperty in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
             {
                 query = query.Include(includeProperty);
             }
@@ -47,6 +48,30 @@ namespace ApplicationStatusMonitor.Data
             }
             return query.ToList();
         }
+        public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null,
+                                        Func<IQueryable<TEntity>,
+                                        IOrderedQueryable<TEntity>> orderby = null,
+                                        params Expression<Func<TEntity, object>>[] includes)
+        {
+            IQueryable<TEntity> query = _dbSet;
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            if (includes != null)
+            {
+                query = query.IncludeMultiple(includes);
+            }
+
+            if (orderby != null)
+            {
+                return orderby(query).ToList();
+            }
+            return query.ToList();
+        }
+
 
         /// <summary>
         /// Returns entity by Id value.

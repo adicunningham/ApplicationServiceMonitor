@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using ApplicationStatusMonitor.Data;
+using ApplicationStatusMonitor.Data.Repository;
+using ApplicationStatusMonitor.Data.UnitOfWork;
 using ApplicationStatusMonitor.Infrastructure;
 using ApplicationStatusMonitor.Model.Entities;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -11,7 +13,7 @@ namespace ModuleTests
     [TestClass]
     public class ServiceModuleTest
     {
-        private IApplicationServiceRepository _serviceRepository;
+        private IUnitOfWork _unitOfWork;
         private IStatusMonitorService _appMonitorService;
         private const string serverName = "ADRIANCUNNIAB0D";
         private const string serviceName = "IISADMIN";
@@ -19,8 +21,8 @@ namespace ModuleTests
         [TestInitialize]
         public void TestSetup()
         {
-            _serviceRepository = new ApplicationServiceRepository();
-            _appMonitorService = new ApplicationStatusMonitorService(_serviceRepository);
+            _unitOfWork = new UnitOfWork();
+            _appMonitorService = new ApplicationStatusMonitorService(_unitOfWork);
         }
 
         [TestMethod]

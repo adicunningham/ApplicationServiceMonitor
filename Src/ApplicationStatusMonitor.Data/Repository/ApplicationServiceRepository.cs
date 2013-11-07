@@ -3,7 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using ApplicationStatusMonitor.Model.Entities;
 
-namespace ApplicationStatusMonitor.Data
+namespace ApplicationStatusMonitor.Data.Repository
 {
     public class ApplicationServiceRepository : IApplicationServiceRepository
     {

@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting.Contexts;
-using System.Text;
-using System.Threading.Tasks;
+using ApplicationStatusMonitor.Data.Repository;
 using ApplicationStatusMonitor.Model.Entities;
 
-namespace ApplicationStatusMonitor.Data
+namespace ApplicationStatusMonitor.Data.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -20,7 +16,10 @@ namespace ApplicationStatusMonitor.Data
 
         public Repository<Application> ApplicationRepository
         {
-            get { return _applicationRepository ?? (_applicationRepository = new Repository<Application>(_context)); }
+            get
+            {
+                return _applicationRepository ?? (_applicationRepository = new Repository<Application>(_context)); 
+            }
         }
 
         public Repository<ApplicationService> ApplicationServiceRepository

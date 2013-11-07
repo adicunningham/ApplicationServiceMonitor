@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Hosting;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 using ApplicationStatusMonitor.Data;
+using ApplicationStatusMonitor.Data.UnitOfWork;
 using ApplicationStatusMonitor.Infrastructure;
 using ApplicationStatusMonitor.Model.Entities;
 
@@ -36,7 +38,8 @@ namespace ServiceModule
         {
             //ServiceController svcController = new ServiceController();
 
-            return _unitOfWork.ApplicationRepository.Get(includeProperties: "Services").ToList();
+            return _unitOfWork.ApplicationRepository.Get(includes: a => a.Services.Select(s => s.Server)).ToList();
+            //_unitOfWork.ApplicationRepository.Get(includeProperties: "Services").Select(svc => svc.Services.Select(s => s.Server)).ToList();
         }
 
         /// <summary>

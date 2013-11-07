@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ApplicationStatusMonitor.Data;
+using ApplicationStatusMonitor.Data.UnitOfWork;
 using ApplicationStatusMonitor.Infrastructure;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Unity;
