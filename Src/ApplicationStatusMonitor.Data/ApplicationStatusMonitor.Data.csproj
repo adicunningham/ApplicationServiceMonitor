@@ -68,6 +68,10 @@
       <Project>{06bbeda4-091c-412e-ae2d-1df47f17453e}</Project>
       <Name>ApplicationStatusMonitor.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Modules\ServiceMonitorModule\ServiceMonitorModule.csproj">
+      <Project>{A81CE66C-8B02-43A9-9CEA-D19DD77EB3D2}</Project>
+      <Name>ServiceMonitorModule</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

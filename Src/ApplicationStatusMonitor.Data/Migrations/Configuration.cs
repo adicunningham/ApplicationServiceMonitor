@@ -31,37 +31,56 @@ namespace ApplicationStatusMonitor.Data.Migrations
             //    );
             //
 
-            var devEnvironment = new Model.Entities.Environment {EnvironmentName = "Development"};
-            var testEnvironment = new Model.Entities.Environment {EnvironmentName = "System Test"};
-            var prodMirrorEnvironment = new Model.Entities.Environment {EnvironmentName = "Prod Mirror"};
-            var prodEnvironment = new Model.Entities.Environment { EnvironmentName = "Production"};
+            var environments = new List<Model.Entities.Environment>
+            {
+                new Model.Entities.Environment {EnvironmentName = "Development"},
+                new Model.Entities.Environment {EnvironmentName = "System Test"},
+                new Model.Entities.Environment {EnvironmentName = "Prod Mirror"},
+                new Model.Entities.Environment {EnvironmentName = "Production "}
+            };
+            environments.ForEach(env => context.Environment.AddOrUpdate(e => e.EnvironmentName, env));
+            context.SaveChanges();
 
-
+            var serviceTypes = new List<ServiceType>
+            {
+                new ServiceType {ServiceTypeName = "Windows"},
+                new ServiceType {ServiceTypeName = "AppPool"}
+            };
+            serviceTypes.ForEach(s => context.ServiceType.AddOrUpdate(st => st.ServiceTypeName, s));
+            context.SaveChanges();
 
             var systemUser = "system";
             var createdOn = DateTime.Now;
 
-            var ac1 = new Server
+            var servers = new List<Server>
             {
-                ServerName = "ESIHM1AC1",
-                CreatedBy = systemUser,
-                CreatedOn = createdOn,
-                ModifiedBy = systemUser,
-                ModifiedOn = createdOn
-
+                new Server
+                {
+                    ServerName = "ESIHM1AP6",
+                    CreatedBy = systemUser,
+                    CreatedOn = createdOn,
+                    ModifiedBy = systemUser,
+                    ModifiedOn = createdOn
+                },
+                new Server
+                {
+                    ServerName = "TSTHM1AP7",
+                    CreatedBy = systemUser,
+                    CreatedOn = createdOn,
+                    ModifiedBy = systemUser,
+                    ModifiedOn = createdOn
+                },
+                new Server
+                {
+                    ServerName = "TSTHM1BIZDEV1",
+                    CreatedBy = systemUser,
+                    CreatedOn = createdOn,
+                    ModifiedBy = systemUser,
+                    ModifiedOn = createdOn
+                }
             };
-            var ac2 = new Server
-            {
-                ServerName = "ESIHM1AC2",
-                CreatedBy = systemUser,
-                CreatedOn = createdOn,
-                ModifiedBy = systemUser,
-                ModifiedOn = createdOn
-            };
-
-            context.Server.AddOrUpdate(s => s.ServerName, ac1);
-            context.Server.AddOrUpdate(s => s.ServerName, ac2);
-
+            servers.ForEach(s => context.Server.AddOrUpdate(sv => sv.ServerName, s));
+            context.SaveChanges();
 
             context.Application.AddOrUpdate(
                 a => a.ApplicationName,
@@ -72,7 +91,7 @@ namespace ApplicationStatusMonitor.Data.Migrations
                     {
                         new ApplicationService
                         {
-                            Server = ac1,
+                            Server = context.Server.Single(s => s.ServerName == "ESIHM1AP6"),
                             ServiceName = "AWB WCF Service",
                             ServiceDescription = "Application Pool that hosts all AWB Services",
                             CreatedBy = systemUser,
@@ -82,9 +101,9 @@ namespace ApplicationStatusMonitor.Data.Migrations
                         },
                         new ApplicationService
                         {
-                            Server = ac1,
+                            Server = context.Server.Single(s => s.ServerName == "ESIHM1AP6"),
                             ServiceName = "RI Common WCF Service",
-                            ServiceDescription = "Applicaiton Pool that host all RI Common Services",
+                            ServiceDescription = "Application Pool that host all RI Common Services",
                             CreatedBy = systemUser,
                             CreatedOn = createdOn,
                             ModifiedBy = systemUser,
@@ -92,7 +111,7 @@ namespace ApplicationStatusMonitor.Data.Migrations
                         },
                         new ApplicationService
                         {
-                            Server = ac2,
+                            Server = context.Server.Single(s => s.ServerName == "TSTHM1AP7"),
                             ServiceName = "AWB WCF Service",
                             ServiceDescription = "Application Pool that hosts all AWB Services",
                             CreatedBy = systemUser,
@@ -102,23 +121,47 @@ namespace ApplicationStatusMonitor.Data.Migrations
                         },
                         new ApplicationService
                         {
-                            Server = ac2,
+                            Server = context.Server.Single(s => s.ServerName == "TSTHM1AP7"),
                             ServiceName = "RI Common WCF Service",
                             ServiceDescription = "Applicaiton Pool that host all RI Common Services",
                             CreatedBy = systemUser,
                             CreatedOn = createdOn,
                             ModifiedBy = systemUser,
                             ModifiedOn = createdOn
+                        }
+                    },
+                    Environment = context.Environment.Single(e => e.EnvironmentName == "System Test"),
+                    CreatedBy = systemUser,
+                    CreatedOn = createdOn,
+                    ModifiedBy = systemUser,
+                    ModifiedOn = createdOn
+                });
+            context.SaveChanges();
 
+            context.Application.AddOrUpdate(a => a.ApplicationName,
+                new Application
+                {
+                    ApplicationName = "Polaris BizTalk",
+                    ApplicationDescription = "Polaris BizTalk Genius Integration Server",
+                    Environment = context.Environment.Single(e => e.EnvironmentName == "Development"),
+                    Services = new List<ApplicationService>
+                    {
+                        new ApplicationService
+                        {
+                            Server = context.Server.Single(s => s.ServerName == "TSTHM1BIZDEV1"),
+                            ServiceName = "BTSSvc$BizTalkServerApplication",
+                            ServiceDescription = "Polaris Development BizTalk Service",
+                            CreatedBy = systemUser,
+                            CreatedOn = createdOn,
+                            ModifiedBy = systemUser,
+                            ModifiedOn = createdOn
                         }
                     },
                     CreatedBy = systemUser,
                     CreatedOn = createdOn,
                     ModifiedBy = systemUser,
                     ModifiedOn = createdOn
-
                 });
-
         }
     }
 }

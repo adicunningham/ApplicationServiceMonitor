@@ -31,7 +31,11 @@ namespace ServiceModule
 
         public IList<ApplicationService> GetApplicationServices()
         {
-            return _unitOfWork.ApplicationServiceRepository.Get(includeProperties: "Server").ToList();
+            var services = _unitOfWork.ApplicationServiceRepository.Get(includes: s => s.Server).ToList();
+
+            services.ForEach(s => s.Status = GetServiceStatus(s.Server.ServerName, s.ServiceName));
+
+            return services;
         }
 
         public IList<Application> GetApplications()
@@ -39,7 +43,6 @@ namespace ServiceModule
             //ServiceController svcController = new ServiceController();
 
             return _unitOfWork.ApplicationRepository.Get(includes: a => a.Services.Select(s => s.Server)).ToList();
-            //_unitOfWork.ApplicationRepository.Get(includeProperties: "Services").Select(svc => svc.Services.Select(s => s.Server)).ToList();
         }
 
         /// <summary>
@@ -51,10 +54,17 @@ namespace ServiceModule
 
         public string GetServiceStatus(string serverName, string serviceName)
         {
-            _serviceController.MachineName = serverName;
-            _serviceController.ServiceName = serviceName;
+            try
+            {
+                _serviceController.MachineName = serverName;
+                _serviceController.ServiceName = serviceName;
 
-            return _serviceController.Status.ToString();
+                return _serviceController.Status.ToString();
+            }
+            catch (InvalidOperationException ex)
+            {
+                return "Offline";
+            }
         }
 
         /// <summary>
@@ -63,15 +73,24 @@ namespace ServiceModule
         /// <param name="serverName"></param>
         /// <param name="serviceName"></param>
         /// <returns></returns>
-        public void StopService(string serverName, string serviceName)
+        public string StopService(string serverName, string serviceName)
         {
             ValidateStartStopServiceArgs(serverName, serviceName);
 
-            _serviceController.MachineName = serverName;
-            _serviceController.ServiceName = serviceName;
+            try
+            {
+                _serviceController.MachineName = serverName;
+                _serviceController.ServiceName = serviceName;
 
-            _serviceController.Stop();
-            _serviceController.WaitForStatus(ServiceControllerStatus.Stopped);
+                _serviceController.Stop();
+                _serviceController.WaitForStatus(ServiceControllerStatus.Stopped);
+                
+            }
+            catch (Exception)
+            {
+                                
+            }
+            return _serviceController.Status.ToString();
         }
 
         /// <summary>
@@ -79,15 +98,22 @@ namespace ServiceModule
         /// </summary>
         /// <param name="serverName"></param>
         /// <param name="serviceName"></param>
-        public void StartService(string serverName, string serviceName)
+        public string StartService(string serverName, string serviceName)
         {
             ValidateStartStopServiceArgs(serverName, serviceName);
 
-            _serviceController.MachineName = serverName;
-            _serviceController.ServiceName = serviceName;
+            try
+            {
+                _serviceController.MachineName = serverName;
+                _serviceController.ServiceName = serviceName;
 
-            _serviceController.Start();
-            _serviceController.WaitForStatus(ServiceControllerStatus.Running);
+                _serviceController.Start();
+                _serviceController.WaitForStatus(ServiceControllerStatus.Running);
+            }
+            catch (Exception)
+            {
+            }
+            return _serviceController.Status.ToString();
         }
 
         /// <summary>

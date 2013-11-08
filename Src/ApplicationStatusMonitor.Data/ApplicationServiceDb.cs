@@ -16,5 +16,7 @@ namespace ApplicationStatusMonitor.Data
         public DbSet<Server> Server { get; set; }
         public DbSet<ApplicationService> ApplicationService { get; set; }
         public DbSet<ServiceType> ServiceType { get; set; }
+
+        public DbSet<Model.Entities.Environment> Environment { get; set; }
     }
 }

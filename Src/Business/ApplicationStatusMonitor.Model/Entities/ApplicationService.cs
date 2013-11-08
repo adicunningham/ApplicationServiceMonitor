@@ -13,16 +13,8 @@ namespace ApplicationStatusMonitor.Model.Entities
         public string ServiceName { get; set; }
         public string ServiceDescription { get; set; }
 
-        public Status Status
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-            set
-            {
-            }
-        }
+        public string Status { get; set; }
+        
         
 
     }

@@ -9,6 +9,6 @@ namespace ApplicationStatusMonitor.Model.Entities
     public class ServiceType : BaseEntity
     {
         public int ServiceTypeId { get; set; }
-        public int ServiceTypeName { get; set; }
+        public string ServiceTypeName { get; set; }
     }
 }

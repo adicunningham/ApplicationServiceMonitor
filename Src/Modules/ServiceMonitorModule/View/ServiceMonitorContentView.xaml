@@ -16,7 +16,8 @@
                   Margin="10" 
                   AlternationCount="2"
                   HorizontalAlignment="Left"
-                  VerticalAlignment="Top">
+                  VerticalAlignment="Top"
+                  SelectedItem="{Binding SelectedService}">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=ApplicationServiceID}" Visibility="Hidden"/>
@@ -29,9 +30,9 @@
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu Name="ActionMenu" StaysOpen="True">
-                    <MenuItem Header="Start"/>
-                    <MenuItem Header="Stop"/>
-                    <MenuItem Header="Restart"/>
+                    <MenuItem Header="Start" Command="{Binding Path=StartServiceCommand}"/>
+                    <MenuItem Header="Stop" Command="{Binding Path=StopServiceCommand}" CommandParameter="{Binding Path=SelectedService}" />
+                    <MenuItem Header="Restart" Command="{Binding Path=RestartServiceCommand}"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>
