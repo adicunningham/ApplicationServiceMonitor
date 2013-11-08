@@ -76,7 +76,7 @@ namespace ServiceModule
         public string StopService(string serverName, string serviceName)
         {
             ValidateStartStopServiceArgs(serverName, serviceName);
-
+            string status;
             try
             {
                 _serviceController.MachineName = serverName;
@@ -84,13 +84,13 @@ namespace ServiceModule
 
                 _serviceController.Stop();
                 _serviceController.WaitForStatus(ServiceControllerStatus.Stopped);
-                
+                status = _serviceController.Status.ToString();
             }
             catch (Exception)
             {
-                                
+                status = "Unavailable";
             }
-            return _serviceController.Status.ToString();
+            return status;
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace ServiceModule
         public string StartService(string serverName, string serviceName)
         {
             ValidateStartStopServiceArgs(serverName, serviceName);
-
+            string status = "";
             try
             {
                 _serviceController.MachineName = serverName;
@@ -109,11 +109,13 @@ namespace ServiceModule
 
                 _serviceController.Start();
                 _serviceController.WaitForStatus(ServiceControllerStatus.Running);
+                status = _serviceController.Status.ToString();
             }
             catch (Exception)
             {
+                status = "Unavailable";
             }
-            return _serviceController.Status.ToString();
+            return status;
         }
 
         /// <summary>

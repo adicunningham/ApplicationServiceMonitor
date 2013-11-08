@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{06BBEDA4-091C-412E-AE2D-1DF47F17453E}</ProjectGuid>
+    <ProjectGuid>{2AD7D7FA-4A17-4F96-BA50-55E18ACF5E9C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ApplicationStatusMonitor.Model</RootNamespace>
-    <AssemblyName>ApplicationStatusMonitor.Model</AssemblyName>
+    <RootNamespace>ApplicationStatusMonitor.Helper</RootNamespace>
+    <AssemblyName>ApplicationStatusMonitor.Helper</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,7 +31,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -40,23 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Application.cs" />
-    <Compile Include="Entities\ApplicationService.cs" />
-    <Compile Include="Entities\BaseEntity.cs" />
-    <Compile Include="Entities\Environment.cs" />
-    <Compile Include="Entities\Server.cs" />
-    <Compile Include="Entities\ServiceType.cs" />
-    <Compile Include="Entities\Status.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="EntityClassDiagram.cd" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\ApplicationStatusMonitor.Helper\ApplicationStatusMonitor.Helper.csproj">
-      <Project>{2ad7d7fa-4a17-4f96-ba50-55e18acf5e9c}</Project>
-      <Name>ApplicationStatusMonitor.Helper</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

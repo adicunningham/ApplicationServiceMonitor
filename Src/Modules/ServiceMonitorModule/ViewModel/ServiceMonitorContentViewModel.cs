@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using ApplicationStatusMonitor.Infrastructure;
 using Microsoft.Practices.Prism.Commands;
 using ServiceMonitorModule.Model;
@@ -17,9 +18,9 @@ namespace ServiceMonitorModule.ViewModel
 
         #region Commands
 
-        public DelegateCommand<int?> StartServiceCommand { get; set; }
+        public DelegateCommand<ApplicationService> StartServiceCommand { get; set; }
         public DelegateCommand<ApplicationService> StopServiceCommand { get; set; }
-        public DelegateCommand<int?> RestartServiceCommand { get; set; }
+        public DelegateCommand<ApplicationService> RestartServiceCommand { get; set; }
 
         #endregion
 
@@ -28,45 +29,50 @@ namespace ServiceMonitorModule.ViewModel
             _statusMonitorService = statusMonitorService;
             LoadServices();
 
-            StartServiceCommand = new DelegateCommand<int?>(StartService, CanStartService);
+            StartServiceCommand = new DelegateCommand<ApplicationService>(StartService, CanStartService);
             StopServiceCommand = new DelegateCommand<ApplicationService>(StopService, CanStopService);
-            RestartServiceCommand = new DelegateCommand<int?>(RestartService, CanRestartService);
+            RestartServiceCommand = new DelegateCommand<ApplicationService>(RestartService, CanRestartService);
         }
 
-        public void StartService(int? index)
+
+        public void StartService(ApplicationService service)
         {
-            MessageBox.Show("StartService");
+            SelectedService.Status = _statusMonitorService.StartService(service.ServerName, service.ServiceName);
+            RaiseContextMenuCanExceute();
         }
 
-        public bool CanStartService(int? index)
+        public bool CanStartService(ApplicationService service)
         {
-            return true;
-            //            return ApplicationServices[index.Value].Status == "Stopped";
+            if (SelectedService.Status == "Offline")
+                return false;
+            return SelectedService != null && SelectedService.Status != "Running";
         }
 
         public void StopService(ApplicationService service)
         {
-
-            service.Status = _statusMonitorService.StopService(service.ServerName, service.ServiceName);
-            SelectedService = service;
-
+            SelectedService.Status = _statusMonitorService.StopService(service.ServerName, service.ServiceName);
+            RaiseContextMenuCanExceute();
         }
 
-        public bool CanStopService(ApplicationService objService)
+        public bool CanStopService(ApplicationService service)
         {
-            return true;
-            //return ((ApplicationService)service).Status == "Running";
+            if (SelectedService.Status == "Offline")
+                return false;
+            return SelectedService != null && SelectedService.Status == "Running";
         }
 
-        public void RestartService(int? index)
+        public void RestartService(ApplicationService servie)
         {
             MessageBox.Show("RestartService");
+            RaiseContextMenuCanExceute();
 
         }
 
-        public bool CanRestartService(int? index)
+        public bool CanRestartService(ApplicationService service)
         {
-            return true;
+            if (SelectedService.Status == "Offline")
+                return false;
+            return SelectedService != null && SelectedService.Status != "Running";
         }
 
         private ObservableCollection<ApplicationService> _applicationServices; 
@@ -83,6 +89,22 @@ namespace ServiceMonitorModule.ViewModel
             }
         }
 
+
+        private int? _selectedIndex;
+        public int? SelectedIndex
+        {
+            get
+            {
+                return _selectedIndex;
+            }
+            set
+            {
+                _selectedIndex = value;
+                RaisePropertyChanged("SelectedIndex");
+            }
+        }
+        
+
         private ApplicationService _selectedService;
         public ApplicationService SelectedService
         {
@@ -94,6 +116,7 @@ namespace ServiceMonitorModule.ViewModel
             {
                 _selectedService = value;
                 RaisePropertyChanged("SelectedService");
+                RaiseContextMenuCanExceute();
             }
         }
 
@@ -109,15 +132,21 @@ namespace ServiceMonitorModule.ViewModel
                 {
                     ApplicationName = service.ServiceName,
                     ServiceName = service.ServiceName,
-                    ApplicationServiceID = service.ApplicationServiceId,
+                    ApplicationServiceId = service.ApplicationServiceId,
                     ServerName = service.Server.ServerName,
                     Status = service.Status,
-                    StatusID = 0
                 });
 
             }
 
             ApplicationServices = _applicationServices;
+        }
+
+        private void RaiseContextMenuCanExceute()
+        {
+            StartServiceCommand.RaiseCanExecuteChanged();
+            StopServiceCommand.RaiseCanExecuteChanged();
+            RestartServiceCommand.RaiseCanExecuteChanged();
         }
     }
 }

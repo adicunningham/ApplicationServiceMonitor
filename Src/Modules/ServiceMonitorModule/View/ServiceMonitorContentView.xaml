@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d">
     <UserControl.Resources>
         <ResourceDictionary Source="../Resources/DataGrid.xaml"/>
@@ -11,14 +12,14 @@
     <Grid>
 
 
-        <DataGrid ItemsSource="{Binding ApplicationServices}" 
+        <DataGrid ItemsSource="{Binding Path=ApplicationServices, Mode=TwoWay}" 
                   AutoGenerateColumns="False" 
                   Margin="10" 
                   AlternationCount="2"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top"
-                  SelectedItem="{Binding SelectedService, Mode=TwoWay}">
-
+                  SelectedItem="{Binding Path=SelectedService, Mode=TwoWay}"
+                  SelectedIndex="{Binding Path=SelectedIndex, Mode=TwoWay}">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=ApplicationServiceID}" Visibility="Hidden"/>
                 <DataGridTextColumn Binding="{Binding Path=StatusId}" Visibility="Hidden"/>
@@ -30,21 +31,13 @@
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu Name="ActionMenu" StaysOpen="True">
-                    <MenuItem Header="Start" Command="{Binding Path=StartServiceCommand}"/>
+                    <MenuItem Header="Start" Command="{Binding Path=StartServiceCommand}" CommandParameter="{Binding Path=SelectedService}"/>
                     <MenuItem Header="Stop" Command="{Binding Path=StopServiceCommand}" CommandParameter="{Binding Path=SelectedService}" />
-                    <MenuItem Header="Restart" Command="{Binding Path=RestartServiceCommand}"/>
+                    <MenuItem Header="Restart" Command="{Binding Path=RestartServiceCommand}" CommandParameter="{Binding Path=SelectedService}"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
+
         </DataGrid>
 
-        <!--<ListBox ItemsSource="{Binding ApplicationServices}" SelectedItem="{Binding SelectedService}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal">
-                        <Label Content="{Binding SelectedService.ServiceName}"/>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>-->
     </Grid>
 </UserControl>

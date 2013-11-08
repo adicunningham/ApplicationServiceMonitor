@@ -3,7 +3,7 @@
   <Class Name="ApplicationStatusMonitor.Model.Entities.Application">
     <Position X="4.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAAAAACAAAEAAAAAQAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>gAAAAAACAAAEAAAAAUAAAACAAAAAEAAAAAAAAAAAAAA=</HashCode>
       <FileName>Entities\Application.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -17,9 +17,10 @@
   <Class Name="ApplicationStatusMonitor.Model.Entities.BaseEntity" Collapsed="true">
     <Position X="9" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAACABAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAE=</HashCode>
+      <HashCode>AAAACABCAAAAAAAAAAAAAAAAgAACAAAAAAAAAAAAAAE=</HashCode>
       <FileName>Entities\BaseEntity.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="ApplicationStatusMonitor.Model.Entities.Environment">
     <Position X="11.5" Y="3.25" Width="1.5" />

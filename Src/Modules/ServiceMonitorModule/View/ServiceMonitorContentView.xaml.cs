@@ -1,4 +1,5 @@
-﻿using ApplicationStatusMonitor.Infrastructure;
+﻿using System.Windows.Input;
+using ApplicationStatusMonitor.Infrastructure;
 using System.Windows.Controls;
 using ServiceMonitorModule.ViewModel;
 
@@ -27,5 +28,6 @@ namespace ServiceMonitorModule.View
                 DataContext = value;
             }
         }
+
     }
 }
