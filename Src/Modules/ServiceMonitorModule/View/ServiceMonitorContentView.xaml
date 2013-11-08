@@ -24,8 +24,16 @@
                 <DataGridTextColumn Binding="{Binding Path=ApplicationServiceID}" Visibility="Hidden"/>
                 <DataGridTextColumn Binding="{Binding Path=StatusId}" Visibility="Hidden"/>
                 <DataGridTextColumn Binding="{Binding Path=ApplicationName}" Header="Application"/>
+                <DataGridTextColumn Binding="{Binding Path=Environment}" Header="Environment"/>
                 <DataGridTextColumn Binding="{Binding Path=ServerName}" Header="Server"/>
-                <DataGridTextColumn Binding="{Binding Path=ServiceName}" Header="Service"/>
+                <DataGridTextColumn Binding="{Binding Path=ServiceDisplayName}" Header="Service"/>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Image}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Binding="{Binding Path=Status}" Header="Status" Width="*"/>
                 
             </DataGrid.Columns>
@@ -34,6 +42,7 @@
                     <MenuItem Header="Start" Command="{Binding Path=StartServiceCommand}" CommandParameter="{Binding Path=SelectedService}"/>
                     <MenuItem Header="Stop" Command="{Binding Path=StopServiceCommand}" CommandParameter="{Binding Path=SelectedService}" />
                     <MenuItem Header="Restart" Command="{Binding Path=RestartServiceCommand}" CommandParameter="{Binding Path=SelectedService}"/>
+                    <MenuItem Header="Refresh" Command="{Binding Path=RefreshServiceCommand}" CommandParameter="{Binding Path=SelectedService}"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
 

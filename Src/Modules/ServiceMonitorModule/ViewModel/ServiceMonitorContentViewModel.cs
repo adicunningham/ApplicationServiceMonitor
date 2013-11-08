@@ -22,6 +22,8 @@ namespace ServiceMonitorModule.ViewModel
         public DelegateCommand<ApplicationService> StopServiceCommand { get; set; }
         public DelegateCommand<ApplicationService> RestartServiceCommand { get; set; }
 
+        public DelegateCommand<ApplicationService> RefreshServiceCommand { get; set; }
+
         #endregion
 
         public ServiceMonitorContentViewModel(IStatusMonitorService statusMonitorService)
@@ -32,12 +34,20 @@ namespace ServiceMonitorModule.ViewModel
             StartServiceCommand = new DelegateCommand<ApplicationService>(StartService, CanStartService);
             StopServiceCommand = new DelegateCommand<ApplicationService>(StopService, CanStopService);
             RestartServiceCommand = new DelegateCommand<ApplicationService>(RestartService, CanRestartService);
+            RefreshServiceCommand = new DelegateCommand<ApplicationService>(RefreshService);
         }
 
 
-        public void StartService(ApplicationService service)
+        public async void StartService(ApplicationService service)
         {
-            SelectedService.Status = _statusMonitorService.StartService(service.ServerName, service.ServiceName);
+            IsBusy = true;
+            var startServiceTask = Task.Factory.StartNew(() => _statusMonitorService.StartService(service.ServerName, service.ServiceName));
+            await startServiceTask.ContinueWith(e =>
+            {
+                IsBusy = false;
+                SelectedService.Status = e.Result;
+                SelectedService.Image = GetImageSource(SelectedService.Status);
+            });
             RaiseContextMenuCanExceute();
         }
 
@@ -48,9 +58,21 @@ namespace ServiceMonitorModule.ViewModel
             return SelectedService != null && SelectedService.Status != "Running";
         }
 
-        public void StopService(ApplicationService service)
+        public async void StopService(ApplicationService service)
         {
-            SelectedService.Status = _statusMonitorService.StopService(service.ServerName, service.ServiceName);
+            IsBusy = true;
+            var stopServiceTask = Task.Factory.StartNew(() => _statusMonitorService.StopService(service.ServerName, service.ServiceName));
+            await stopServiceTask.ContinueWith(e =>
+            {
+                if (e.IsCompleted)
+                {
+                    IsBusy = false;
+                    SelectedService.Status = e.Result;
+                    SelectedService.Image = GetImageSource(SelectedService.Status);
+                }
+            });
+            
+
             RaiseContextMenuCanExceute();
         }
 
@@ -63,9 +85,7 @@ namespace ServiceMonitorModule.ViewModel
 
         public void RestartService(ApplicationService servie)
         {
-            MessageBox.Show("RestartService");
-            RaiseContextMenuCanExceute();
-
+            SelectedService.Status = _statusMonitorService.GetServiceStatus(SelectedService.ServerName, SelectedService.ServiceName);
         }
 
         public bool CanRestartService(ApplicationService service)
@@ -74,6 +94,12 @@ namespace ServiceMonitorModule.ViewModel
                 return false;
             return SelectedService != null && SelectedService.Status != "Running";
         }
+
+        public void RefreshService(ApplicationService servie)
+        {
+            SelectedService.Status = _statusMonitorService.GetServiceStatus(SelectedService.ServerName, SelectedService.ServiceName);
+        }
+
 
         private ObservableCollection<ApplicationService> _applicationServices; 
         public ObservableCollection<Model.ApplicationService> ApplicationServices
@@ -89,6 +115,8 @@ namespace ServiceMonitorModule.ViewModel
             }
         }
 
+
+        public bool IsBusy { get; set; }
 
         private int? _selectedIndex;
         public int? SelectedIndex
@@ -124,22 +152,41 @@ namespace ServiceMonitorModule.ViewModel
         {
             _applicationServices = new ObservableCollection<ApplicationService>();
 
-            var appServices = _statusMonitorService.GetApplicationServices();
+            var applications = _statusMonitorService.GetApplications();
 
-            foreach (var service in appServices)
+            foreach (var app in applications)
             {
-                _applicationServices.Add(new ApplicationService
+                foreach (var service in app.Services)
                 {
-                    ApplicationName = service.ServiceName,
-                    ServiceName = service.ServiceName,
-                    ApplicationServiceId = service.ApplicationServiceId,
-                    ServerName = service.Server.ServerName,
-                    Status = service.Status,
-                });
+                    _applicationServices.Add(new ApplicationService
+                    {
+                        ApplicationName = app.ApplicationName,
+                        Environment = app.Environment.EnvironmentName,
+                        ServiceName = service.ServiceName,
+                        ServiceDisplayName = service.ServiceDisplayName,
+                        ApplicationServiceId = service.ApplicationServiceId,
+                        ServerName = service.Server.ServerName,
+                        Status = service.Status,
+                        Image = GetImageSource(service.Status)
+                    });
+                }
 
             }
 
             ApplicationServices = _applicationServices;
+        }
+
+        private string GetImageSource(string status)
+        {
+            switch (status)
+            {
+                case "Running":
+                    return "Images/accept.png";
+                case "Stopped":
+                    return "Images/remove.png";
+                default:
+                    return "";
+            }
         }
 
         private void RaiseContextMenuCanExceute()

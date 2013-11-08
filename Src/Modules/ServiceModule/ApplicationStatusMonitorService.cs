@@ -10,6 +10,8 @@ using ApplicationStatusMonitor.Data;
 using ApplicationStatusMonitor.Data.UnitOfWork;
 using ApplicationStatusMonitor.Infrastructure;
 using ApplicationStatusMonitor.Model.Entities;
+using Microsoft.Practices.ObjectBuilder2;
+using EnumerableExtensions = Microsoft.Practices.ObjectBuilder2.EnumerableExtensions;
 
 namespace ServiceModule
 {
@@ -42,7 +44,13 @@ namespace ServiceModule
         {
             //ServiceController svcController = new ServiceController();
 
-            return _unitOfWork.ApplicationRepository.Get(includes: a => a.Services.Select(s => s.Server)).ToList();
+            var applications = _unitOfWork.ApplicationRepository.Get(null, null, a => a.Services.Select(s => s.Server), a => a.Environment).ToList();
+            foreach (var app in applications)
+            {
+                app.Services.ForEach(s => s.Status = GetServiceStatus(s.Server.ServerName, s.ServiceName));
+            }
+
+            return applications;
         }
 
         /// <summary>
@@ -59,6 +67,7 @@ namespace ServiceModule
                 _serviceController.MachineName = serverName;
                 _serviceController.ServiceName = serviceName;
 
+                _serviceController.Refresh();
                 return _serviceController.Status.ToString();
             }
             catch (InvalidOperationException ex)

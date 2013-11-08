@@ -1,5 +1,18 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <LinearGradientBrush x:Key="OnlineBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="FloralWhite"/>
+        <GradientStop Offset="1" Color="LightGreen"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="OfflineBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="FloralWhite"/>
+        <GradientStop Offset="1" Color="LightGray"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="StoppedBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Offset="0" Color="FloralWhite"/>
+        <GradientStop Offset="1" Color="Red"/>
+    </LinearGradientBrush>
+
 
     <!-- DataGrid Column Header Style -->
     <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -53,6 +66,7 @@
     <Style TargetType="{x:Type DataGridRow}">
         <Setter Property="Background" Value="LightYellow"/>
         <Setter Property="SnapsToDevicePixels" Value="True"></Setter>
+        <Setter Property="Height" Value="24px"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridRow}">
@@ -83,7 +97,7 @@
                                 </VisualState>
                                 <VisualState x:Name="Normal_Selected">
                                     <Storyboard>
-                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="DgrBorder" 
+                                        <ColorAnimationUsingKeyFrames Storyboard.TargetName="DgrBorder"
                                                                       Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
                                             <EasingColorKeyFrame KeyTime="0" Value="#CCAA0000" />
                                         </ColorAnimationUsingKeyFrames>
@@ -132,13 +146,24 @@
 			                                    Visibility="{Binding HeadersVisibility,
                                                                      ConverterParameter={x:Static DataGridHeadersVisibility.Row},
                                                                      Converter={x:Static DataGrid.HeadersVisibilityConverter},    
-                                                                     RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"    />
+                                                                     RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"/>
                         </SelectiveScrollingGrid>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
+
+
+        <!-- Your row style -->
+    <Style x:Key="HighlightRow" TargetType="{x:Type DataGridRow}">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Status}" Value="Running">
+                <Setter Property="Background" Value="{StaticResource OnlineBrush}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
 
     <!-- DataGrid Cell Style -->
     <Style TargetType="{x:Type DataGridCell}">

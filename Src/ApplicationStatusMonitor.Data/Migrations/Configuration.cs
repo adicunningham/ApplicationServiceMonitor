@@ -72,6 +72,22 @@ namespace ApplicationStatusMonitor.Data.Migrations
                 },
                 new Server
                 {
+                    ServerName = "TSTWP1BIZQA1",
+                    CreatedBy = systemUser,
+                    CreatedOn = createdOn,
+                    ModifiedBy = systemUser,
+                    ModifiedOn = createdOn
+                },
+                new Server
+                {
+                    ServerName = "TSTWP1BIZQA3",
+                    CreatedBy = systemUser,
+                    CreatedOn = createdOn,
+                    ModifiedBy = systemUser,
+                    ModifiedOn = createdOn
+                },
+                new Server
+                {
                     ServerName = "TSTHM1BIZDEV1",
                     CreatedBy = systemUser,
                     CreatedOn = createdOn,
@@ -141,7 +157,7 @@ namespace ApplicationStatusMonitor.Data.Migrations
             context.Application.AddOrUpdate(a => a.ApplicationName,
                 new Application
                 {
-                    ApplicationName = "Polaris BizTalk",
+                    ApplicationName = "Polaris BizTalk Dev",
                     ApplicationDescription = "Polaris BizTalk Genius Integration Server",
                     Environment = context.Environment.Single(e => e.EnvironmentName == "Development"),
                     Services = new List<ApplicationService>
@@ -150,6 +166,7 @@ namespace ApplicationStatusMonitor.Data.Migrations
                         {
                             Server = context.Server.Single(s => s.ServerName == "TSTHM1BIZDEV1"),
                             ServiceName = "BTSSvc$BizTalkServerApplication",
+                            ServiceDisplayName = "BizTalk",
                             ServiceDescription = "Polaris Development BizTalk Service",
                             CreatedBy = systemUser,
                             CreatedOn = createdOn,
@@ -162,6 +179,58 @@ namespace ApplicationStatusMonitor.Data.Migrations
                     ModifiedBy = systemUser,
                     ModifiedOn = createdOn
                 });
+
+            context.Application.AddOrUpdate(a => a.ApplicationName,
+            new Application
+            {
+                ApplicationName = "Polaris BizTalk QA",
+                ApplicationDescription = "Polaris BizTalk Genius Integration Server",
+                Environment = context.Environment.Single(e => e.EnvironmentName == "System Test"),
+                Services = new List<ApplicationService>
+                            {
+                                new ApplicationService
+                                {
+                                    Server = context.Server.Single(s => s.ServerName == "TSTWP1BIZQA1"),
+                                    ServiceName = "BTSSvc$BizTalkServerApplication",
+                                    ServiceDisplayName = "BizTalk",
+                                    ServiceDescription = "Polaris QA BizTalk Service",
+                                    CreatedBy = systemUser,
+                                    CreatedOn = createdOn,
+                                    ModifiedBy = systemUser,
+                                    ModifiedOn = createdOn
+                                }
+                            },
+                CreatedBy = systemUser,
+                CreatedOn = createdOn,
+                ModifiedBy = systemUser,
+                ModifiedOn = createdOn
+            });
+
+            context.Application.AddOrUpdate(a => a.ApplicationName,
+            new Application
+            {
+                ApplicationName = "Polaris BizTalk Prod Mirror",
+                ApplicationDescription = "Polaris BizTalk Genius Integration Server",
+                Environment = context.Environment.Single(e => e.EnvironmentName == "Prod Mirror"),
+                Services = new List<ApplicationService>
+                {
+                    new ApplicationService
+                    {
+                        Server = context.Server.Single(s => s.ServerName == "TSTWP1BIZQA3"),
+                        ServiceName = "BTSSvc$BizTalkServerApplication",
+                        ServiceDisplayName = "BizTalk",
+                        ServiceDescription = "Polaris Prod Mirror BizTalk Service",
+                        CreatedBy = systemUser,
+                        CreatedOn = createdOn,
+                        ModifiedBy = systemUser,
+                        ModifiedOn = createdOn
+                    }
+                },
+                CreatedBy = systemUser,
+                CreatedOn = createdOn,
+                ModifiedBy = systemUser,
+                ModifiedOn = createdOn
+            });
         }
     }
 }

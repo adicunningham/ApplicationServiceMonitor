@@ -51,6 +51,20 @@ namespace ApplicationStatusMonitor.Model.Entities
             }
         }
 
+        private string _serviceDisplayName;
+        public string ServiceDisplayName
+        {
+            get
+            {
+                return _serviceDisplayName;
+            }
+            set
+            {
+                _serviceDisplayName = value;
+                RaisePropertyChanged("ServiceDisplayName");
+            }
+        }
+
         private string _serviceDescription;
 
         public string ServiceDescription

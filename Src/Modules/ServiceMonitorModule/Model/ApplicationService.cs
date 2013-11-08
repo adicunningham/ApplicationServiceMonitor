@@ -46,6 +46,21 @@ namespace ServiceMonitorModule.Model
             }
         }
 
+        private string _serviceDisplayName;
+        public string ServiceDisplayName
+        {
+            get
+            {
+                return _serviceDisplayName;
+            }
+            set
+            {
+                _serviceDisplayName = value;
+                RaisePropertyChanged("ServiceDisplayName");
+            }
+        }
+
+
         private string _serverName;
         public string ServerName
         {
@@ -60,6 +75,21 @@ namespace ServiceMonitorModule.Model
             }
         }
 
+        private string _environment;
+        public string Environment
+        {
+            get
+            {
+                return _environment;
+            }
+            set
+            {
+                _environment = value;
+                RaisePropertyChanged("Status");
+            }
+        }
+
+
         private string _status;
         public string Status
         {
@@ -73,5 +103,20 @@ namespace ServiceMonitorModule.Model
                 RaisePropertyChanged("Status");
             }
         }
+
+        private string _image;
+        public string Image
+        {
+            get
+            {
+                return _image;
+            }
+            set
+            {
+                _image = value;
+                RaisePropertyChanged("Image");
+            }
+        }
+
     }
 }
