@@ -47,8 +47,8 @@ namespace ServiceMonitorModule.ViewModel
         public void StopService(ApplicationService service)
         {
 
-            _statusMonitorService.StopService(service.ServerName, service.ServiceName);
-            LoadServices();
+            service.Status = _statusMonitorService.StopService(service.ServerName, service.ServiceName);
+            SelectedService = service;
 
         }
 

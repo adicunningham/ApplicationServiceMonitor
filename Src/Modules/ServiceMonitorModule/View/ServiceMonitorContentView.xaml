@@ -17,7 +17,7 @@
                   AlternationCount="2"
                   HorizontalAlignment="Left"
                   VerticalAlignment="Top"
-                  SelectedItem="{Binding SelectedService}">
+                  SelectedItem="{Binding SelectedService, Mode=TwoWay}">
 
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=ApplicationServiceID}" Visibility="Hidden"/>

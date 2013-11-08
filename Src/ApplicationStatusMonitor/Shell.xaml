@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://www.codeplex.com/prism" 
         xmlns:inf="clr-namespace:ApplicationStatusMonitor.Infrastructure;assembly=ApplicationStatusMonitor.Infrastructure"
-        Title="Shell" Height="600" Width="600">
+        Title="Shell" Height="600" Width="1024">
 
     <Window.Resources>
         <Border x:Key="LayoutBorder" BorderBrush="Teal" BorderThickness="1"/>
